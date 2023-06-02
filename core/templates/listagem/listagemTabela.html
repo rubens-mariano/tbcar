@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    ListaTabela
+{% endblock %}
+{% block main %}
+<div class="">
+    <h3 class="cadastro">Lista de Tabelas</h3>
+    <br>
+    {% for i in dados %}
+        <form class="user-card">
+            <label>Descrição</label>
+            <input value="{{i.descricao}}" disabled/>
+
+            <label>Valor</label>
+            {% if i.valor %} 
+                <input value="{{i.valor}}" disabled/>
+            {% else %}
+                <input value="" disabled/>
+            {% endif %}
+
+             <a href="{% url 'url_altera_tabela' i.id %}">Editar</a>
+             <a href="{% url 'url_altera_tabela' i.id %}">Excluir</a>
+        </form>
+        {% endfor %}
+    <br>
+        <button onclick="window.location.href='/'">Voltar</button>
+</div>
+{% endblock %}

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    {% block extrahead %}{% endblock %}
+
+</head>
+<body>
+    <div class="container-fluid pt-1">
+        <div class="row bg-dark">
+            <!-- Brand -->
+            <div class="col-12 bg-dark">
+                <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+                    <div class="container-fluid">
+                        <a class="navbar-brand" href="#">Logo</a>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="row w-100 collapse navbar-collapse" id="collapsibleNavbar">
+                            <div class="col-6">
+                                <!-- Links -->
+                                <ul class="navbar-nav">
+                                    <li class="nav-item dropdown">
+                                      <a class="nav-link nav-item" href="/">
+                                        Home
+                                      </a>
+                                    </li>
+                                    <!-- Dropdown -->
+                                    <li class="nav-item dropdown">
+                                      <a class="nav-link dropdown-toggle" href="#" id="navbardrop1" data-bs-toggle="dropdown">
+                                        Cliente
+                                      </a>
+                                      <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="/cadastrosCliente/">Cadastro</a>
+                                        <a class="dropdown-item" href="/listagemCliente/">Listagem</a>
+                                      </div>
+                                    </li>
+                                    <li class="nav-item dropdown">
+                                      <a class="nav-link dropdown-toggle" href="#" id="navbardrop2" data-bs-toggle="dropdown">
+                                        Veículo
+                                      </a>
+                                      <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="/cadastroVeiculo/">Cadastro</a>
+                                        <a class="dropdown-item" href="/listagemVeiculo/">Listagem</a>
+                                      </div>
+                                    </li>
+                                    <li class="nav-item dropdown">
+                                      <a class="nav-link dropdown-toggle" href="#" id="navbardrop3" data-bs-toggle="dropdown">
+                                        Movimentação
+                                      </a>
+                                      <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="/cadastrosMensalista/">Cadastro Mensalista</a>
+                                        <a class="dropdown-item" href="/cadastroRotativo/">Cadastro Rotativo</a>
+                                        <hr>
+                                        <a class="dropdown-item" href="/listagemMensalista/">Listagem Mensalista</a>
+                                        <a class="dropdown-item" href="/listagemRotativo/">Listagem Rotativo</a>
+                                      </div>
+                                    </li>
+                                    <li class="nav-item dropdown">
+                                      <a class="nav-link dropdown-toggle" href="#" id="navbardrop4" data-bs-toggle="dropdown">
+                                        Tabela
+                                      </a>
+                                      <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="/cadastroTabela">Cadastro</a>
+                                        <a class="dropdown-item" href="/tabela/">Listagem</a>
+                                      </div>
+                                    </li>
+                                    <li class="nav-item dropdown">
+                                      <a class="nav-link dropdown-toggle" href="#" id="navbardrop5" data-bs-toggle="dropdown">
+                                        Marcas
+                                      </a>
+                                      <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="/cadastroMarca/">Cadastro</a>
+                                        <a class="dropdown-item" href="/listagemMarca/">Listagem</a>
+                                      </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            {% if listagem %}
+                                <div class="col">
+                                    <form class="d-flex" method="POST">
+                                        {% csrf_token %}
+                                        <input class="form-control me-2" type="text" placeholder="{{ text_input }}" name="input_pesquisa">
+                                        <button class="btn btn-primary" type="submit">Pesquisa</button>
+                                    </form>
+                                </div>
+                            {% endif %}
+                            <div class="col text-white d-flex justify-content-end align-items-center">
+                                <!-- Info Usuário -->
+                                {% if user.get_username %}
+                                    <span class="ml-5">Bem vindo(a) <strong>{{ user.get_username }}</strong> &nbsp;</span>
+                                    <a href="/admin/">Admin</a> |
+                                    <a href="/accounts/logout/">Logout</a>
+                                {% else %}
+                                    <span class="ml-5">Usuário(a) não autenticado(a)&nbsp;</span>
+                                    <a href="/accounts/login">Login</a> |
+                                    <a href="/accounts/registrar/">Registrar</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        {% block main %}{% endblock %}
+    </div>
+</body>
+</html>

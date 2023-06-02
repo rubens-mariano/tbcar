@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    listaVeiculo
+{% endblock %}
+{% block main %}
+<div class="pt-2 row text-center">
+    {% if messages %}
+        {% for mensagem in messages %}
+            <div class="alert alert-success alert-dismissible">
+                <button type="button" class="btn-close" data-bs-dismiss="alert">&times;</button>
+                {{ mensagem }}
+            </div>
+        {% endfor %}
+    {% endif %}
+    <br>
+    <div class="">
+        <table class="table caption-top">
+            <caption>Lista de Veículos</caption>
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Placa</th>
+                    <th scope="col">Modelo</th>
+                    <th scope="col">Cor</th>
+                    <th scope="col">Ano</th>
+                    <th scope="col">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in dados %}
+                    <tr>
+                        <th scope="row">
+                            {% if i.foto%}
+                                <img src="{{i.foto.url}}" class="img" width="50" alt="...">
+                            {% else %}
+                                <img src="{% static 'img/icon_profile.png' %}" class="img" width="50" alt="...">
+                            {% endif %}
+                        </th>
+                        <td>
+                            {% if i.placa %}
+                                {{i.placa}}
+                            {% else %}
+                                <p></p>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if i.modelo %}
+                                {{i.modelo}}
+                            {% else %}
+                                <p></p>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if i.cor %}
+                                {{i.cor}}
+                            {% else %}
+                                <p></p>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if i.ano %}
+                                {{i.ano}}
+                            {% else %}
+                                <p></p>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <div class="d-flex justify-content-center">
+                                <a href="{% url 'url_altera_veiculo' i.id %}" class="btn btn-primary media-link m-1">Editar</a>
+                                <a href="{% url 'url_excluir_veiculo' i.id %}" class="btn btn-danger m-1">Excluir</a>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <br>
+</div>
+<button onclick="window.location.href='/'">Voltar</button>
+{% endblock %}

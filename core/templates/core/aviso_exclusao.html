@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block title %}
+  Aviso!
+{% endblock %}
+
+{% block main %}
+  <h3>{{ txt_tipo }}: {{ txt_info }} excluído com sucesso!</h3>
+  <button type="button" onclick="window.location.href='{{ txt_url }}'">Ok</button>
+{% endblock %}

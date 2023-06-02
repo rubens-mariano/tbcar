@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Login
+{% endblock %}
+
+{% block main %}
+
+<div class="cadastro">
+    <h3>Login</h3>
+</div>
+<form method="POST" class="form">
+        {% csrf_token %}
+        {{form.as_p}}
+    <button type="submit">Login</button>
+    <button onclick="window.location.href='/'">Voltar</button>
+</form>
+
+
+{% endblock %}

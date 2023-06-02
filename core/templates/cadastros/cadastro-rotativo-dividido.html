@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block extrahead %}
+    {{ form.media }}
+{% endblock %}
+
+{% block title %}
+    {{ titulo_pagina }}
+{% endblock %}
+
+{% block main %}
+    <h3 class="text-center">{{ txt_nome_pagina }}</h3>
+    <form class="row justify-content-center" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="col-12 col-sm-12 col-md-6">
+            {{ form.entrada | as_crispy_field }}
+            {{ form.veiculo_id | as_crispy_field }}
+            {{ form.tabela_id | as_crispy_field }}
+        </div>
+        <div class="col-12 col-sm-12 col-md-6">
+            {{ form.saida | as_crispy_field }}
+            {{ form.total | as_crispy_field }}
+            {{ form.pago | as_crispy_field }}
+            {{ form.observacoes | as_crispy_field }}
+
+            <button class="btn btn-success" type="submit">Salvar</button>
+            <button class="btn btn-danger" onclick="window.location.href='/'">Cancelar</button>
+        </div>
+    </form>
+{% endblock %}
